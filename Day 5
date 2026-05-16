@@ -1,0 +1,9 @@
+1) learnt about selection sort 
+its basic idea is to swap the element with smallest in the remaining array ,its an unstable algorithm (ie equal elements can change their respective positions)
+![alt text](image-10.png)
+2) learnt about bubble sort 
+basic idea is to swap the element with its next ,in first round the first largest will be in its position as in after sort.
+![alt text](image-11.png)
+3) leet code 1482 
+https://leetcode.com/problems/minimum-number-of-days-to-make-m-bouquets/submissions/2004827695/
+![alt text](image-12.png)
