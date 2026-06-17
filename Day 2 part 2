@@ -1,0 +1,123 @@
+// 1) subsequences of string
+
+    void solve(string s,int index,vector<string>&ans,string output){
+        if(index>=s.length()){
+           if(output.length>0) ans.push_back(output);
+            return;
+        }
+      
+        solve(s,index+1,ans,output);
+        
+        output.push_back(s[index]);
+        solve(s,index+1,ans,output);
+    }
+    // 2)contest questions
+    #include <bits/stdc++.h>
+using namespace std;
+
+
+
+int partition(int arr[],int start,int end){
+    int pivot=arr[start];
+    int count=0;
+    for(int i=start+1;i<=end;i++){
+        if(arr[i]<=pivot) count++;
+    }
+
+    swap(arr[start+count],arr[start]);
+
+    int i=start,j=end;
+    int p_index=start+count;
+    while(i<p_index &&j>p_index){
+        while(arr[i]<=pivot){
+            i++;
+        }
+        while(arr[j]>pivot){
+            j--;
+        }
+        if(i<p_index &&j>p_index){
+            swap(arr[i],arr[j]);
+        }
+    }
+    return p_index;
+
+}
+
+void quicksort(int arr[],int start,int end){
+    if(start>=end){
+        return ;
+    }
+    int p=partition(arr,start,end);
+    quicksort(arr,start,p-1);
+    quicksort(arr,p+1,end);
+}
+
+
+int main() {
+    
+    int t,n,k;
+	cin>>t;
+	cout<<endl;
+	for(int m=1;m<=t;m++){int count=0;int some=0;
+	cin>>n;cin>>k;
+	int arr[n];
+	for(int i=0;i<n;i++){
+	    cin>>arr[i];
+	}
+  quicksort(arr,0,n-1);
+   for(int k1=0;k1<n;k1++){
+       some =some+arr[k1];
+   }
+  for(int i=1;i<=n;i++){
+      for(int j=i+1;j<=n;j++){
+          int sum=some;
+          sum=sum/2+arr[i-1]/2+arr[j-1]/2;
+          if(sum>k){
+              count ++;
+          }
+          
+      }
+  }
+	  cout<<count<<endl;
+	  
+	}
+	return 0;
+
+}
+// 2nd question
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+	// your code goes here
+	int t,m,n;
+	cin>>t;
+	cout<<endl;
+	for(int i=1;i<=t;i++){
+	    cin>>m;cin>>n;
+	    while(m<n){
+	        m=m-1;n=n-3;
+	    }
+	    cout<<m-n<<endl;
+	}
+	
+
+}
+// 3rd question
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+	// your code goes here
+	int x,y;
+     cin>>x;
+     cin>>y;
+     if((x-y)*(x-y)<=4){
+      cout<<"Interesting";
+     }
+     else cout<< "Boring";
+     return 0;
+}
+
+
+   
