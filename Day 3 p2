@@ -1,0 +1,79 @@
+//1) leet code p-2
+class Solution {
+    private:
+    void solve(string digits,vector<string>& ans,string output,int index,string mapping[]){
+        if(index>=digits.length()){
+          ans.push_back(output);
+          return ;
+        }
+        int number=digits[index]-'0';
+        string value=mapping[number];
+        for(int i=0;i<value.length();i++){
+            output.push_back(value[i]);
+            solve(digits,ans,output,index+1,mapping);
+            output.pop_back();
+        }
+    }
+public:
+    vector<string> letterCombinations(string digits) {
+        vector<string> ans;
+        string output ="";
+        int index=0;
+        string mapping[10]={"","","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+        solve(digits,ans,output,index,mapping);
+        return ans;
+    }
+};
+https://leetcode.com/problems/letter-combinations-of-a-phone-number/submissions/2037648374/
+2026-06-18-19-46-05.png
+// 2) permutations in a string
+#include <iostream>
+#include <vector>
+#include <unordered_set>
+using namespace std;
+bool hasDuplicates(string s)
+{
+    unordered_set<char> seen;
+    for (char c : s)
+    {
+        if (seen.count(c))
+            return true;
+        seen.insert(c);
+    }
+    return false;
+}
+
+void solve(vector<string> &ans, string output, int index, string s)
+{
+    if (index >= s.length())
+    {
+
+        if (!hasDuplicates(output))
+        {
+            ans.push_back(output);
+        }
+
+        return;
+    }
+
+    for (int i = 0; i < s.length(); i++)
+    {
+        output.push_back(s[i]);
+        solve(ans, output, index + 1, s);
+        output.pop_back();
+    }
+}
+
+int main()
+{
+    string s = "abc";
+    vector<string> ans;
+    string output;
+    int index = 0;
+    solve(ans, output, index, s);
+    for (auto x : ans)
+    {
+        cout << x << endl;
+    }
+    return 0;
+}
