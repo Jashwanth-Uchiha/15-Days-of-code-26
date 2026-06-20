@@ -1,0 +1,70 @@
+//1. leetcode 39
+class Solution {
+    private:
+    void solve(int index,vector<int> output,vector<vector<int>>& ans,vector<int>& candidates,int& sum){
+        if(sum==0){
+            ans.push_back(output);
+            return ;
+        }
+        if(sum<0){
+            return ;
+        }
+        if(index >= candidates.size()) return;
+        //take index
+     
+            output.push_back(candidates[index]);
+            sum=sum-candidates[index];
+            solve(index,output,ans,candidates,sum);
+            sum=sum+candidates[index];
+            output.pop_back();
+        
+        // do not take
+        solve(index+1,output,ans,candidates,sum);
+    }
+
+public:
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+        sort(candidates.begin(),candidates.end());
+        vector<vector<int>> ans;vector<int> output;int index=0;
+        solve(index,output,ans,candidates,target);
+        return ans;
+    }
+};
+2026-06-20-17-15-43.png
+// 2.leet code 40
+class Solution {
+    private:
+  void solve(vector<vector<int>>& ans,vector<int>output,int sum,int index,vector<int>& candidates){
+    if(sum==0){
+        ans.push_back(output);
+        return ;
+    }
+    if(sum<0){
+        return ;
+    }
+    if(index>=candidates.size()){
+       return ;
+    }
+for(int i=index;i<candidates.size();i++){
+    if(i>index && candidates[i]==candidates[i-1]) continue;
+   output.push_back(candidates[i]);
+     sum=sum-candidates[i];
+   solve(ans,output,sum,i+1,candidates);
+    sum=sum+candidates[i];
+     output.pop_back();
+}
+ 
+  }
+
+public:
+    vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
+        sort(candidates.begin(),candidates.end());
+        vector<vector<int>> ans;
+        vector<int> output;
+        
+         int sum=target;
+         solve(ans,output,sum,0,candidates);
+         return ans;
+
+    }
+};
