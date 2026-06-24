@@ -1,0 +1,85 @@
+// 1)gfg power set
+class Solution {
+    private:
+    void solve(string s,int index,string output,vector<string>& ans){
+        if(index>=s.length()){
+            ans.push_back(output);
+            return ;
+        }
+        
+        // not taking that element;
+        solve(s,index+1,output,ans);
+        //taking that element
+        output.push_back(s[index]);
+        solve(s,index+1,output,ans);
+        output.pop_back();
+        
+        
+    }
+    
+  public:
+    vector<string> powerSet(string &s) {
+        vector<string> ans;
+        string output="";
+        int index=0;
+        solve(s,index,output,ans);
+        sort(ans.begin(),ans.end());
+        return ans;
+        
+    }
+};
+2026-06-24-18-31-39.png
+// 2)leet code 22
+class Solution {
+    private:
+    void solve(int left ,int right,string output,vector<string> & ans,int n){
+        if(left==n && right==n){
+            ans.push_back(output);
+            return ;
+        }
+       if(left<n){
+        output.push_back('(');
+        solve(left+1,right,output,ans,n);
+        output.pop_back();
+       }
+  if(right<left){
+    output.push_back(')');
+    solve(left,right+1,output,ans,n);
+        output.pop_back();
+
+  }
+    }
+public:
+    vector<string> generateParenthesis(int n) {
+        vector<string> ans;
+        string output="";
+      int right=0;int left=0;
+      solve(left,right,output,ans,n);
+      return ans;
+    }
+};
+2026-06-24-21-09-35.png
+// 3) leet code 1922
+class Solution {
+public:
+    const int M = 1e9 + 7;
+
+    int findPower(long long a, long long b) {
+        if (b == 0) return 1;
+
+        long long half = findPower(a, b / 2);
+        long long result = (half * half) % M;
+
+        if (b % 2 == 1) {
+            result = (result * a) % M;
+        }
+
+        return result;
+    }
+
+    int countGoodNumbers(long long n) {
+        return (long long)findPower(5, (n + 1) / 2) *
+               findPower(4, n / 2) % M;
+    }
+};
+2026-06-24-22-49-24.png
