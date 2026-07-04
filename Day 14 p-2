@@ -1,0 +1,91 @@
+// leet code 1021 remove outer parenthesis
+class Solution
+{
+public:
+    string removeOuterParentheses(string s)
+    {
+        int n = s.length();
+        string ans = "";
+        int count = 0;
+        for (int i = 0; i < n; i++)
+        {
+            if (s[i] == '(')
+            {
+                if (count > 0)
+                {
+                    ans.push_back(s[i]);
+                }
+                count++;
+            }
+            if (s[i] == ')')
+            {
+                count--;
+                if (count > 0)
+                {
+                    ans.push_back(s[i]);
+                }
+            }
+        }
+        return ans;
+    }
+};
+// leet code 151 reverse words of string
+class Solution
+{
+public:
+    string reverseWords(string s)
+    {
+        string ans = "";
+        string word = "";
+        s = s + ' ';
+        for (int i = 0; i < s.length(); i++)
+        {
+            if (s[i] != ' ')
+            {
+                word = word + s[i];
+            }
+            else
+            {
+                if (word != "")
+                {
+                    if (ans != "")
+                    {
+                        ans = " " + ans;
+                    }
+                    ans = word + ans;
+                    word = "";
+                }
+            }
+        }
+        return ans;
+    }
+};
+// leet code 1903 larget odd number in string
+class Solution
+{
+private:
+    int lastodd(string nums)
+    {
+        int num = INT_MIN;
+        for (int i = 0; i < nums.length(); i++)
+        {
+            if (nums[i] % 2)
+            {
+                num = i;
+            }
+        }
+        return num;
+    }
+
+public:
+    string largestOddNumber(string nums)
+    {
+        string ans = "";
+        int index = lastodd(nums);
+        for (int i = 0; i <= index; i++)
+        {
+            ans.push_back(nums[i]);
+        }
+        return ans;
+    }
+};

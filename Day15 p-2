@@ -1,0 +1,90 @@
+// leetcode 14 common prefix
+class Solution
+{
+public:
+    string longestCommonPrefix(vector<string> &strs)
+    {
+        string ans = strs[0];
+        for (int i = 1; i < strs.size(); i++)
+        {
+            int j = 0;
+            while (j < ans.size() && j < strs[i].size() && ans[j] == strs[i][j])
+            {
+                j++;
+            }
+            ans = ans.substr(0, j);
+            if (ans.empty())
+                return "";
+        }
+        return ans;
+    }
+};
+// leet code 796  rotate string
+class Solution
+{
+public:
+    bool rotateString(string s, string goal)
+    {
+        if (s.length() != goal.length())
+        {
+            return false;
+        }
+        string n = s + s;
+        int count = 0;
+        int k = n.length();
+        for (int i = 0; i < k - goal.length(); i++)
+        {
+            for (int j = i; j < i + goal.length(); j++)
+            {
+                if (n[j] == goal[j - i])
+                {
+                    count++;
+                }
+                if (count == goal.length())
+                {
+                    return true;
+                }
+            }
+            count = 0;
+        }
+        return false;
+    }
+};
+// leet code 242
+class Solution
+{
+public:
+    bool isAnagram(string s, string t)
+    {
+        sort(s.begin(), s.end());
+        sort(t.begin(), t.end());
+        if (s == t)
+        {
+            return true;
+        }
+        return false;
+    }
+};
+// leet code 1614 maximum depth of parenthesis
+class Solution
+{
+public:
+    int maxDepth(string s)
+    {
+        int depth = 0;
+        int k = 0;
+        for (int i = 0; i < s.length(); i++)
+        {
+            if (s[i] == '(')
+            {
+                depth++;
+                k = max(depth, k);
+            }
+            if (s[i] == ')')
+            {
+                depth--;
+            }
+        }
+        return k;
+    }
+};
